@@ -23,7 +23,7 @@ para ejecutar la aplicacion:
 1. Clone el repositorio:
 
 ```shell
-https://github.com/derpito8909/Colegio-NET.git
+git clone https://github.com/derpito8909/Colegio-NET.git
 ```
 2. Ingrese a la carpeta /Colegio-NET/Colegio_API/ e ingrese estos comandos para inicar la aplicacion
 
@@ -339,3 +339,42 @@ Code 204
 }
 ```
 </details>
+
+# FrontEnd Colegio WEB (Razor C#)
+Pagina web para visualizar el APP CRUD del Colegio
+---
+<details open>
+<summary>
+## ✅ Pre-requisitos
+</summary>
+Para ejecutar la aplicacion necesita tener instalado:
+  
+- **Node.js** 20+ (recomendado LTS)
+- Acceso al **API** corriendo en local
+</details>
+
+<details open>
+<summary>
+## 🚀 Ejecutar la aplicacion
+</summary> <br>
+para ejecutar la aplicacion:
+
+1. Clone el repositorio:
+
+```shell
+git clone https://github.com/derpito8909/Colegio-NET.git
+```
+2. Ingrese a la carpeta /Colegio-NET/ColegioWebApp e ingrese estos comandos para inicar la aplicacion
+
+```shell
+ cd Colegio-NET/ColegioWebApp/
+ npm i
+ dotnet restore
+ dotnet build
+ dotnet run --project Colegio.Web/Colegio.Web.csproj
+```
+</details>
+
+## Autor
+
+<p>desarrollador por David Esteban Rodriguez Pineda 2026&copy;</p>
