@@ -1,0 +1,86 @@
+@page
+@model Colegio.Web.Pages.Estudiantes.IndexModel
+@{
+    ViewData["Title"] = "Estudiantes";
+}
+
+<div class="page-header d-print-none mb-3">
+    <div class="row align-items-center">
+        <div class="col">
+            <h2 class="page-title">Estudiantes</h2>
+            <div class="text-muted">Gestión de estudiantes</div>
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-success" asp-page="Create">
+                <i class="ti ti-plus"></i> Crear
+            </a>
+        </div>
+    </div>
+</div>
+
+<partial name="_Alerts" />
+
+<div class="card">
+  <div class="card-table table-responsive">
+    <table class="table table-vcenter">
+      <thead>
+        <tr>
+          <th style="width: 80px;">Id</th>
+          <th>Nombre</th>
+          <th class="text-end" style="width: 280px;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      @foreach (var e in Model.PageData.Items)
+      {
+        <tr>
+          <td>@e.Id</td>
+          <td>@e.Nombre</td>
+          <td class="text-end">
+            <a class="btn btn-sm btn-primary" asp-page="Edit" asp-route-id="@e.Id">
+              <i class="ti ti-edit"></i> Editar
+            </a>
+
+            <button type="button"
+                    class="btn btn-sm btn-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target="#confirmDeleteModal"
+                    data-id="@e.Id"
+                    data-page="@Model.PageData.Page"
+                    data-pagesize="@Model.PageData.PageSize"
+                    data-text="¿Seguro que deseas eliminar el estudiante '@e.Nombre' (Id: @e.Id)?">
+              <i class="ti ti-trash"></i> Eliminar
+            </button>
+          </td>
+        </tr>
+      }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-footer d-flex align-items-center">
+    <p class="m-0 text-muted">
+      Página <span>@Model.PageData.Page</span> de <span>@Model.PageData.TotalPages</span>
+    </p>
+
+    <ul class="pagination m-0 ms-auto">
+      <li class="page-item @(Model.PageData.HasPrev ? "" : "disabled")">
+        <a class="page-link"
+           asp-route-page="@(Model.PageData.Page - 1)"
+           asp-route-pageSize="@Model.PageData.PageSize">
+          <i class="ti ti-chevron-left"></i> Anterior
+        </a>
+      </li>
+
+      <li class="page-item @(Model.PageData.HasNext ? "" : "disabled")">
+        <a class="page-link"
+           asp-route-page="@(Model.PageData.Page + 1)"
+           asp-route-pageSize="@Model.PageData.PageSize">
+          Siguiente <i class="ti ti-chevron-right"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<partial name="_ConfirmDeleteModal" />

@@ -1,0 +1,96 @@
+@page
+@model Colegio.Web.Pages.Notas.Index
+@{
+    ViewData["Title"] = "Notas";
+}
+
+<div class="page-header d-print-none mb-3">
+  <div class="row align-items-center">
+    <div class="col">
+      <h2 class="page-title">Notas</h2>
+      <div class="text-muted">Gestión de notas (0 a 10)</div>
+    </div>
+    <div class="col-auto">
+      <a class="btn btn-success" asp-page="Create">
+        <i class="ti ti-plus"></i> Crear
+      </a>
+    </div>
+  </div>
+</div>
+
+<partial name="_Alerts" />
+
+<div class="card">
+  <div class="card-table table-responsive">
+    <table class="table table-vcenter">
+      <thead>
+        <tr>
+          <th style="width: 80px;">Id</th>
+          <th>Nombre</th>
+          <th style="width: 90px;">Valor</th>
+          <th>Profesor</th>
+          <th>Estudiante</th>
+          <th class="text-end" style="width: 340px;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      @foreach (var n in Model.PageData.Items)
+      {
+        <tr>
+          <td>@n.Id</td>
+          <td>@n.Nombre</td>
+          <td>@n.Valor</td>
+          <td>@n.ProfesorNombre</td>
+          <td>@n.EstudianteNombre</td>
+          <td class="text-end">
+            <a class="btn btn-sm btn-info" asp-page="Details" asp-route-id="@n.Id">
+              <i class="ti ti-eye"></i> Ver
+            </a>
+
+            <a class="btn btn-sm btn-primary" asp-page="Edit" asp-route-id="@n.Id">
+              <i class="ti ti-edit"></i> Editar
+            </a>
+
+            <button type="button"
+                    class="btn btn-sm btn-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target="#confirmDeleteModal"
+                    data-id="@n.Id"
+                    data-page="@Model.PageData.Page"
+                    data-pagesize="@Model.PageData.PageSize"
+                    data-text="¿Seguro que deseas eliminar la nota '@n.Nombre' (Id: @n.Id)?">
+              <i class="ti ti-trash"></i> Eliminar
+            </button>
+          </td>
+        </tr>
+      }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-footer d-flex align-items-center">
+    <p class="m-0 text-muted">
+      Página <span>@Model.PageData.Page</span> de <span>@Model.PageData.TotalPages</span>
+    </p>
+
+    <ul class="pagination m-0 ms-auto">
+      <li class="page-item @(Model.PageData.HasPrev ? "" : "disabled")">
+        <a class="page-link"
+           asp-route-page="@(Model.PageData.Page - 1)"
+           asp-route-pageSize="@Model.PageData.PageSize">
+          <i class="ti ti-chevron-left"></i> Anterior
+        </a>
+      </li>
+
+      <li class="page-item @(Model.PageData.HasNext ? "" : "disabled")">
+        <a class="page-link"
+           asp-route-page="@(Model.PageData.Page + 1)"
+           asp-route-pageSize="@Model.PageData.PageSize">
+          Siguiente <i class="ti ti-chevron-right"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<partial name="_ConfirmDeleteModal" />

@@ -1,0 +1,52 @@
+@page "{id:int}"
+@model Colegio.Web.Pages.Notas.Edit
+@{
+    ViewData["Title"] = "Editar nota";
+}
+
+<h2>Editar nota</h2>
+<partial name="_Alerts" />
+
+<form method="post" id="notaForm">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input class="form-control" asp-for="Form.Nombre" />
+        <span class="text-danger" asp-validation-for="Form.Nombre"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Profesor</label>
+        <select class="form-select" asp-for="Form.IdProfesor" asp-items="Model.Profesores"></select>
+        <span class="text-danger" asp-validation-for="Form.IdProfesor"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Estudiante</label>
+        <select class="form-select" asp-for="Form.IdEstudiante" asp-items="Model.Estudiantes"></select>
+        <span class="text-danger" asp-validation-for="Form.IdEstudiante"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Valor (0 a 10)</label>
+        <input class="form-control" asp-for="Form.Valor" />
+        <span class="text-danger" asp-validation-for="Form.Valor"></span>
+    </div>
+
+    <button type="button"
+            class="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#confirmActionModal"
+            data-form="#notaForm"
+            data-title="Confirmar actualización"
+            data-text="¿Deseas actualizar esta nota?">
+        Actualizar
+    </button>
+    <a class="btn btn-secondary" asp-page="Index">Volver</a>
+</form>
+<partial name="_ConfirmActionModal" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

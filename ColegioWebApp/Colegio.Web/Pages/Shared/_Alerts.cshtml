@@ -1,0 +1,39 @@
+@* Alerts Tabler *@
+@if (TempData["Ok"] is string ok)
+{
+    <div class="alert alert-success" role="alert">
+        <div class="d-flex">
+            <div><i class="ti ti-check"></i></div>
+            <div class="ms-2">
+                <h4 class="alert-title">Correcto</h4>
+                <div class="text-secondary">@ok</div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (TempData["Error"] is string err)
+{
+    <div class="alert alert-danger" role="alert">
+        <div class="d-flex">
+            <div><i class="ti ti-alert-triangle"></i></div>
+            <div class="ms-2">
+                <h4 class="alert-title">No se pudo completar</h4>
+                <div class="text-secondary">@err</div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (TempData["Warn"] is string warn)
+{
+    <div class="alert alert-warning" role="alert">
+        <div class="d-flex">
+            <div><i class="ti ti-alert-circle"></i></div>
+            <div class="ms-2">
+                <h4 class="alert-title">Atención</h4>
+                <div class="text-secondary">@warn</div>
+            </div>
+        </div>
+    </div>
+}

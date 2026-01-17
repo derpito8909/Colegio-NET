@@ -1,0 +1,88 @@
+﻿@using Microsoft.AspNetCore.Mvc.RazorPages
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var path = HttpContextAccessor.HttpContext?.Request?.Path.Value ?? "";
+    bool IsActive(string startsWith) =>
+        path.StartsWith(startsWith, StringComparison.OrdinalIgnoreCase);
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ColegioApp</title>
+
+    <link rel="stylesheet" href="~/lib/tabler/tabler.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/tabler-icons/tabler-icons.css" asp-append-version="true" /><
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Colegio.Web.styles.css" asp-append-version="true" />
+</head>
+
+<body>
+<div class="page">
+    <!-- Sidebar -->
+    <aside class="navbar navbar-vertical navbar-expand-sm" data-bs-theme="dark">
+        <div class="container-fluid">
+            <h1 class="navbar-brand navbar-brand-autodark">
+                <a asp-page="/Index" class="text-decoration-none text-white">
+                    ColegioApp
+                </a>
+            </h1>
+
+            <div class="navbar-nav flex-column">
+                <a class="nav-link @(IsActive("/Estudiantes") ? "active" : "")" asp-page="/Estudiantes/Index">
+                    <span class="nav-link-icon"><i class="ti ti-users"></i></span>
+                    <span class="nav-link-title">Estudiantes</span>
+                </a>
+
+                <a class="nav-link @(IsActive("/Profesores") ? "active" : "")" asp-page="/Profesores/Index">
+                    <span class="nav-link-icon"><i class="ti ti-user"></i></span>
+                    <span class="nav-link-title">Profesores</span>
+                </a>
+
+                <a class="nav-link @(IsActive("/Notas") ? "active" : "")" asp-page="/Notas/Index">
+                    <span class="nav-link-icon"><i class="ti ti-notes"></i></span>
+                    <span class="nav-link-title">Notas</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Contenido -->
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="navbar navbar-expand-md d-print-none">
+            <div class="container-xl">
+                <div class="navbar-nav flex-row order-md-last">
+                    <!-- lugar para perfil/tema si lo quieres -->
+                </div>
+
+                <div class="navbar-nav">
+                    <span class="navbar-brand">Panel</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-body">
+            <div class="container-xl">
+                @RenderBody()
+            </div>
+        </div>
+
+        <footer class="footer footer-transparent d-print-none">
+            <div class="container-xl">
+                <div class="text-muted">© @DateTime.Now.Year ColegioApp</div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<script src="~/lib/tabler/tabler.min.js" asp-append-version="true"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

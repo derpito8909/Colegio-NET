@@ -1,0 +1,31 @@
+@page
+@model Colegio.Web.Pages.Profesores.Create
+@{
+    ViewData["Title"] = "Crear profesor";
+}
+
+<h2>Crear profesor</h2>
+<partial name="_Alerts" />
+
+<form method="post" id="profesorForm">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input class="form-control" asp-for="Form.Nombre" />
+        <span class="text-danger" asp-validation-for="Form.Nombre"></span>
+    </div>
+
+    <button type="button"
+            class="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#confirmActionModal"
+            data-form="#profesorForm"
+            data-title="Confirmar creación"
+            data-text="¿Deseas crear este profesor?">
+        Guardar
+    </button>
+    <a class="btn btn-secondary" asp-page="Index">Volver</a>
+</form>
+<partial name="_ConfirmActionModal" />
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

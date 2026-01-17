@@ -1,0 +1,30 @@
+<div class="modal modal-blur fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteTitle">Confirmar eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="text-muted" id="confirmDeleteText">
+                    ¿Seguro que deseas eliminar este registro?
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn" data-bs-dismiss="modal">Cancelar</button>
+                
+                <form method="post" asp-page-handler="Delete" id="confirmDeleteForm" class="m-0">
+                    <input type="hidden" name="id" id="confirmDeleteId" />
+                    <input type="hidden" name="page" id="confirmDeletePage" />
+                    <input type="hidden" name="pageSize" id="confirmDeletePageSize" />
+
+                    <button type="submit" class="btn btn-danger">
+                        Sí, eliminar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
